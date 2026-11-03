@@ -16,6 +16,7 @@ import {
   Lock,
 } from "lucide-react";
 import { auth, googleAuthProvider } from "../lib/firebase.ts";
+import { adminFetch, ApiRequestError } from "./api.ts";
 import { OverviewModule } from "./modules/OverviewModule.tsx";
 import { ToursModule } from "./modules/ToursModule.tsx";
 import { DestinationsModule } from "./modules/DestinationsModule.tsx";
@@ -47,6 +48,7 @@ const NAV_ITEMS: Array<{
 export const AdminApp: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
+  const [isAuthorizedAdmin, setIsAuthorizedAdmin] = useState<boolean | null>(null);
   const [authError, setAuthError] = useState("");
   const [signingIn, setSigningIn] = useState(false);
 
@@ -63,7 +65,29 @@ export const AdminApp: React.FC = () => {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (nextUser) => {
       setUser(nextUser);
-      setAuthReady(true);
+      if (!nextUser) {
+        setIsAuthorizedAdmin(null);
+        setAuthReady(true);
+        return;
+      }
+      setIsAuthorizedAdmin(null);
+      adminFetch<{ authorized: boolean }>("/api/admin/session")
+        .then(() => {
+          setIsAuthorizedAdmin(true);
+          setAuthReady(true);
+        })
+        .catch((err: unknown) => {
+          if (err instanceof ApiRequestError && err.status === 403) {
+            setIsAuthorizedAdmin(false);
+            setAuthError(err.message);
+          } else {
+            setIsAuthorizedAdmin(false);
+            setAuthError(
+              err instanceof Error ? err.message : "Failed to verify administrator session.",
+            );
+          }
+          setAuthReady(true);
+        });
     });
     return () => unsub();
   }, []);
@@ -115,9 +139,9 @@ export const AdminApp: React.FC = () => {
         </div>
       )}
 
-      {!authReady ? (
+      {!authReady || (user && isAuthorizedAdmin === null) ? (
         <div className="flex-1 flex items-center justify-center p-6">
-          <div className="text-sm text-slate-500">Verifying administrator session...</div>
+          <div className="text-sm text-slate-500">Verifying administrator privileges...</div>
         </div>
       ) : !user ? (
         <div className="flex-1 flex flex-col items-center justify-center p-6">
@@ -140,8 +164,8 @@ export const AdminApp: React.FC = () => {
                 Sign in to manage marketplace
               </h1>
               <p className="text-sm text-slate-600">
-                Authenticate with your Google account to manage tours, destinations, flight routes,
-                pricing, media, and website content.
+                Authenticate with your authorized Google administrator account to manage tours,
+                destinations, flight routes, pricing, media, and website content.
               </p>
             </div>
 
@@ -168,6 +192,42 @@ export const AdminApp: React.FC = () => {
               >
                 Return to Public Site
                 <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </div>
+      ) : !isAuthorizedAdmin ? (
+        <div className="flex-1 flex flex-col items-center justify-center p-6">
+          <div className="w-full max-w-md bg-white border border-red-200 rounded-xl p-8 shadow-sm space-y-5">
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-bold uppercase tracking-wider text-red-700">
+                Administrator Access Restricted
+              </div>
+              <Lock className="w-4 h-4 text-red-600" />
+            </div>
+
+            <div className="space-y-1.5">
+              <h1 className="text-lg font-semibold text-slate-900">Unauthorized Google Account</h1>
+              <p className="text-sm text-slate-600">
+                Signed in as <strong className="text-slate-900">{user.email}</strong>, which is not
+                listed as an authorized SaqoTravel administrator.
+              </p>
+              {authError && <p className="text-xs text-red-700 pt-1">{authError}</p>}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
+              <button
+                type="button"
+                onClick={() => void handleSignOut()}
+                className="flex-1 py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg cursor-pointer"
+              >
+                Sign Out & Switch Account
+              </button>
+              <a
+                href="/"
+                className="py-2.5 px-4 border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-semibold rounded-lg text-center"
+              >
+                Public Website
               </a>
             </div>
           </div>

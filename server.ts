@@ -35,6 +35,7 @@ import {
   listPromotions,
   listTours,
   logAdminActivity,
+  propagateMediaUrlReplacement,
   updateCity,
   updateCountry,
   updateDestination,
@@ -152,6 +153,15 @@ async function startServer() {
   // ADMIN API ENDPOINTS (Protected by Firebase Google Auth)
   // =========================================================================
   app.use("/api/admin", requireAuth);
+
+  app.get("/api/admin/session", (req: AuthRequest, res) => {
+    res.json({
+      authorized: true,
+      uid: req.user?.uid || "",
+      email: req.user?.email || "",
+      role: "admin",
+    });
+  });
 
   app.get("/api/admin/overview", async (_req: AuthRequest, res) => {
     try {
@@ -1154,6 +1164,8 @@ async function startServer() {
           mimeType: file.mimetype,
           sizeBytes: file.size,
         });
+
+        await propagateMediaUrlReplacement(existing.url, stored.url);
 
         await logAdminActivity({
           actorUid: req.user?.uid || "",

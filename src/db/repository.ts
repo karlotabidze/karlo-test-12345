@@ -36,7 +36,7 @@ function wrapDbError(context: string, error: unknown): never {
   throw new Error(`${context}. Please try again.`, { cause: error });
 }
 
-export async function upsertUser(uid: string, email: string, displayName = "") {
+export async function upsertUser(uid: string, email: string, displayName = "", grantAdmin = false) {
   try {
     const result = await db
       .insert(users)
@@ -44,12 +44,14 @@ export async function upsertUser(uid: string, email: string, displayName = "") {
         uid,
         email,
         displayName,
+        role: grantAdmin ? "admin" : "viewer",
       })
       .onConflictDoUpdate({
         target: users.uid,
         set: {
           email,
           displayName,
+          ...(grantAdmin ? { role: "admin" } : {}),
           updatedAt: new Date(),
         },
       })
@@ -151,26 +153,43 @@ export async function getPublicBootstrapData() {
   try {
     await deactivateExpiredPromotions();
 
-    const [publishedTours, publishedDestinations, activeFlights, activePromos, contentRows] =
-      await Promise.all([
-        db
-          .select()
-          .from(tours)
-          .where(eq(tours.published, true))
-          .orderBy(desc(tours.featured), tours.id),
-        db
-          .select()
-          .from(destinations)
-          .where(eq(destinations.published, true))
-          .orderBy(desc(destinations.featured), destinations.id),
-        db
-          .select()
-          .from(flightRoutes)
-          .where(eq(flightRoutes.active, true))
-          .orderBy(desc(flightRoutes.isManual), flightRoutes.id),
-        db.select().from(promotions).where(eq(promotions.active, true)),
-        db.select().from(siteContent).where(eq(siteContent.sectionKey, "main")).limit(1),
-      ]);
+    const [
+      publishedTours,
+      publishedDestinations,
+      publishedCountries,
+      publishedCities,
+      activeFlights,
+      activePromos,
+      contentRows,
+    ] = await Promise.all([
+      db
+        .select()
+        .from(tours)
+        .where(eq(tours.published, true))
+        .orderBy(desc(tours.featured), tours.id),
+      db
+        .select()
+        .from(destinations)
+        .where(eq(destinations.published, true))
+        .orderBy(desc(destinations.featured), destinations.id),
+      db
+        .select()
+        .from(countries)
+        .where(eq(countries.published, true))
+        .orderBy(desc(countries.featured), countries.nameEn),
+      db
+        .select()
+        .from(cities)
+        .where(eq(cities.published, true))
+        .orderBy(desc(cities.featured), cities.nameEn),
+      db
+        .select()
+        .from(flightRoutes)
+        .where(eq(flightRoutes.active, true))
+        .orderBy(desc(flightRoutes.isManual), flightRoutes.id),
+      db.select().from(promotions).where(eq(promotions.active, true)),
+      db.select().from(siteContent).where(eq(siteContent.sectionKey, "main")).limit(1),
+    ]);
 
     const enrichedTours = publishedTours.map((tour) => {
       const pricing = computeEffectiveTourPricing(tour, activePromos);
@@ -187,6 +206,8 @@ export async function getPublicBootstrapData() {
     return {
       tours: enrichedTours,
       destinations: publishedDestinations,
+      countries: publishedCountries,
+      cities: publishedCities,
       flights: activeFlights,
       siteContent: contentRows[0] || null,
     };
@@ -768,6 +789,82 @@ export async function deleteMediaAssetRecord(id: number) {
     return deleted;
   } catch (error) {
     wrapDbError("Failed to delete media asset", error);
+  }
+}
+
+export async function propagateMediaUrlReplacement(oldUrl: string, newUrl: string) {
+  if (!oldUrl || !newUrl || oldUrl === newUrl) return;
+  try {
+    const now = new Date();
+    await Promise.all([
+      db
+        .update(countries)
+        .set({ imageUrl: newUrl, updatedAt: now })
+        .where(eq(countries.imageUrl, oldUrl)),
+      db
+        .update(cities)
+        .set({ imageUrl: newUrl, updatedAt: now })
+        .where(eq(cities.imageUrl, oldUrl)),
+      db
+        .update(flightRoutes)
+        .set({ airlineLogo: newUrl, updatedAt: now })
+        .where(eq(flightRoutes.airlineLogo, oldUrl)),
+      db
+        .update(flightRoutes)
+        .set({ routeImage: newUrl, updatedAt: now })
+        .where(eq(flightRoutes.routeImage, oldUrl)),
+      db
+        .update(siteContent)
+        .set({ heroImageUrl: newUrl, updatedAt: now })
+        .where(eq(siteContent.heroImageUrl, oldUrl)),
+      db
+        .update(siteContent)
+        .set({ heroSecondaryImageUrl: newUrl, updatedAt: now })
+        .where(eq(siteContent.heroSecondaryImageUrl, oldUrl)),
+      db
+        .update(siteContent)
+        .set({ aboutImageUrl: newUrl, updatedAt: now })
+        .where(eq(siteContent.aboutImageUrl, oldUrl)),
+    ]);
+
+    const [allTours, allDestinations] = await Promise.all([
+      db.select({ id: tours.id, mainImage: tours.mainImage, gallery: tours.gallery }).from(tours),
+      db
+        .select({
+          id: destinations.id,
+          mainImage: destinations.mainImage,
+          gallery: destinations.gallery,
+        })
+        .from(destinations),
+    ]);
+
+    for (const tour of allTours) {
+      const nextMain = tour.mainImage === oldUrl ? newUrl : tour.mainImage;
+      const nextGallery = Array.isArray(tour.gallery)
+        ? tour.gallery.map((u) => (u === oldUrl ? newUrl : u))
+        : [];
+      if (nextMain !== tour.mainImage || nextGallery.some((u, idx) => u !== tour.gallery[idx])) {
+        await db
+          .update(tours)
+          .set({ mainImage: nextMain, gallery: nextGallery, updatedAt: now })
+          .where(eq(tours.id, tour.id));
+      }
+    }
+
+    for (const dest of allDestinations) {
+      const nextMain = dest.mainImage === oldUrl ? newUrl : dest.mainImage;
+      const nextGallery = Array.isArray(dest.gallery)
+        ? dest.gallery.map((u) => (u === oldUrl ? newUrl : u))
+        : [];
+      if (nextMain !== dest.mainImage || nextGallery.some((u, idx) => u !== dest.gallery[idx])) {
+        await db
+          .update(destinations)
+          .set({ mainImage: nextMain, gallery: nextGallery, updatedAt: now })
+          .where(eq(destinations.id, dest.id));
+      }
+    }
+  } catch (error) {
+    console.error("Failed to propagate replaced media URL across records:", error);
   }
 }
 

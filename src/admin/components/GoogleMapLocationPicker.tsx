@@ -10,7 +10,7 @@ import {
 } from "@vis.gl/react-google-maps";
 import { Search, MapPin } from "lucide-react";
 
-const MAPS_API_KEY = String(import.meta.env["VITE_GOOGLE_MAPS_API_KEY"] || "");
+const MAPS_API_KEY = String(import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "");
 
 export interface SelectedMapLocation {
   googlePlaceId: string;

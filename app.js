@@ -78,6 +78,8 @@ const translations = {
     culture: "კულტურა",
     wine: "ღვინო",
     adventure: "თავგადასავალი",
+    cityType: "ქალაქი",
+    gastronomy: "გასტრონომია",
     anyDuration: "ნებისმიერი",
     oneDay: "1 დღე",
     twoThreeDays: "2–3 დღე",
@@ -172,6 +174,8 @@ const translations = {
     culture: "Culture",
     wine: "Wine",
     adventure: "Adventure",
+    cityType: "City",
+    gastronomy: "Gastronomy",
     anyDuration: "Any duration",
     oneDay: "1 day",
     twoThreeDays: "2–3 days",
@@ -372,10 +376,16 @@ function applySiteContent() {
 
   const seoTitle = isEn ? content.seoTitleEn : content.seoTitleKa;
   const seoDesc = isEn ? content.seoDescriptionEn : content.seoDescriptionKa;
-  if (seoTitle) document.title = seoTitle;
+  if (seoTitle) {
+    document.title = seoTitle;
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", seoTitle);
+  }
   if (seoDesc) {
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute("content", seoDesc);
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute("content", seoDesc);
   }
 }
 

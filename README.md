@@ -1,11 +1,21 @@
-<div align="center">
+# Saqo Travel
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Saqo Travel is a static travel marketplace prototype. Tour and flight examples are loaded from JSON files in `data/`.
 
-  <h1>Built with AI Studio</h2>
+## Run locally
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+```sh
+npm install
+npm run dev
+```
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Render Static Site deployment
 
-</div>
+Create a **Static Site** connected to this repository and select branch `fix/render-static-build` to preview these fixes.
+
+- **Build command:** `npm install && npm run build`
+- **Publish directory:** `dist`
+
+The build validates the HTML, CSS, JavaScript and JSON data files, then copies the static website into `dist/`. No server-side runtime is required for this static build.
+
+> Flight listings are currently demo data. Do not present their prices or schedules as live airline inventory.

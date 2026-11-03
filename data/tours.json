@@ -1,0 +1,186 @@
+[
+  {
+    "id": "tbilisi-old-town",
+    "city": "თბილისი",
+    "cityEn": "Tbilisi",
+    "title": "ძველი თბილისის ხიბლი",
+    "titleEn": "The Charm of Old Tbilisi",
+    "description": "აღმოაჩინე ძველი უბნები, აივნები, გოგირდის აბანოები და ქალაქის საუკეთესო ხედები.",
+    "descriptionEn": "Discover historic lanes, carved balconies, sulphur baths and beautiful city views.",
+    "price": 65,
+    "days": 1,
+    "type": "culture",
+    "typeKa": "კულტურა",
+    "image": "https://guide.planetofhotels.com/sites/default/files/styles/big_gallery_image/public/text_gallery/Tbilisi-3.jpg",
+    "itinerary": [
+      "მეტეხის ტაძარი და ძველი თბილისი",
+      "აბანოთუბანი და ლეღვთახევი",
+      "ნარიყალას ხედები და მშვიდობის ხიდი"
+    ],
+    "itineraryEn": [
+      "Metekhi Church and Old Tbilisi",
+      "Abanotubani and Leghvtakhevi",
+      "Narikala viewpoints and Bridge of Peace"
+    ],
+    "included": ["ადგილობრივი გიდი", "ქალაქის საფეხმავლო ტური"],
+    "includedEn": ["Local guide", "Walking tour"]
+  },
+  {
+    "id": "kazbegi-mountains",
+    "city": "ყაზბეგი",
+    "cityEn": "Kazbegi",
+    "title": "ყაზბეგის მთებისკენ",
+    "titleEn": "Into the Kazbegi Mountains",
+    "description": "სამხედრო გზა, ანანური, გუდაური და გერგეტის სამების დაუვიწყარი პანორამა.",
+    "descriptionEn": "The Military Highway, Ananuri, Gudauri and the iconic Gergeti Trinity views.",
+    "price": 190,
+    "days": 1,
+    "type": "nature",
+    "typeKa": "ბუნება",
+    "image": "https://azerbaijanguide.az/_next/image?q=75&url=https%3A%2F%2Fapi.azerbaijanguide.az%2Fmedia%2Ftours%2Fimages%2Fkazbegi-6.webp&w=750",
+    "itinerary": [
+      "ანანურის ციხე-სიმაგრე",
+      "გუდაურის პანორამული გაჩერება",
+      "სტეფანწმინდა და გერგეტის სამება"
+    ],
+    "itineraryEn": [
+      "Ananuri Fortress",
+      "Gudauri panoramic stop",
+      "Stepantsminda and Gergeti Trinity"
+    ],
+    "included": ["ტრანსპორტი თბილისიდან", "გიდი", "წყალი"],
+    "includedEn": ["Transport from Tbilisi", "Guide", "Water"]
+  },
+  {
+    "id": "kakheti-wine",
+    "city": "კახეთი",
+    "cityEn": "Kakheti",
+    "title": "ღვინის გზა კახეთში",
+    "titleEn": "Wine Route in Kakheti",
+    "description": "სიღნაღის ქუჩები, ალაზნის ველი და ქართული ღვინის ტრადიციები.",
+    "descriptionEn": "Sighnaghi streets, Alazani Valley views and Georgia's ancient wine traditions.",
+    "price": 155,
+    "days": 1,
+    "type": "wine",
+    "typeKa": "ღვინო",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/2015-05-03%20Signagi.jpg?width=1200",
+    "itinerary": ["ბოდბის მონასტერი", "სიღნაღის ძველი ქალაქი", "ოჯახური მარნის მონახულება"],
+    "itineraryEn": ["Bodbe Monastery", "Sighnaghi old town", "Visit to a family winery"],
+    "included": ["ტრანსპორტი", "გიდი", "დეგუსტაცია"],
+    "includedEn": ["Transport", "Guide", "Tasting"]
+  },
+  {
+    "id": "batumi-coast",
+    "city": "ბათუმი",
+    "cityEn": "Batumi",
+    "title": "ბათუმი და შავი ზღვის სანაპირო",
+    "titleEn": "Batumi and the Black Sea Coast",
+    "description": "თანამედროვე ბულვარი, ძველი ქალაქი, ზღვისპირა ხედები და აჭარული გემოები.",
+    "descriptionEn": "The modern boulevard, old town, sea views and Adjarian flavours.",
+    "price": 85,
+    "days": 1,
+    "type": "culture",
+    "typeKa": "კულტურა",
+    "image": "https://j1ad0nr4fkte9vkm.public.blob.vercel-storage.com/blog/batumi-attractions-rA2nRJpxV19KvCrJ8DLGvOlPXXuBpQ.webp",
+    "itinerary": [
+      "ბათუმის ბულვარი",
+      "ევროპის მოედანი და ძველი ქალაქი",
+      "ალი და ნინო, ზღვისპირა მზის ჩასვლა"
+    ],
+    "itineraryEn": [
+      "Batumi Boulevard",
+      "Europe Square and Old Town",
+      "Ali and Nino, sunset by the sea"
+    ],
+    "included": ["ადგილობრივი გიდი", "საფეხმავლო ტური"],
+    "includedEn": ["Local guide", "Walking tour"]
+  },
+  {
+    "id": "mestia-svaneti",
+    "city": "მესტია",
+    "cityEn": "Mestia",
+    "title": "სვანეთის ოთხდღიანი თავგადასავალი",
+    "titleEn": "Four Days in Svaneti",
+    "description": "კოშკები, მყინვარები, უძველესი სოფლები და კავკასიონის საოცარი პეიზაჟები.",
+    "descriptionEn": "Defensive towers, glaciers, ancient villages and dramatic Caucasus scenery.",
+    "price": 690,
+    "days": 4,
+    "type": "adventure",
+    "typeKa": "თავგადასავალი",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Towers%20of%20Mestia%2C%20Svaneti.jpg?width=1200",
+    "itinerary": [
+      "დღე 1 — ზუგდიდი და მესტია",
+      "დღე 2 — მესტიის მუზეუმი და ჰაწვალი",
+      "დღე 3 — უშგული და ლამარია",
+      "დღე 4 — დაბრუნება"
+    ],
+    "itineraryEn": [
+      "Day 1 — Zugdidi and Mestia",
+      "Day 2 — Mestia Museum and Hatsvali",
+      "Day 3 — Ushguli and Lamaria",
+      "Day 4 — Return journey"
+    ],
+    "included": ["3 ღამის განთავსება", "ტრანსპორტი", "გიდი"],
+    "includedEn": ["3 nights accommodation", "Transport", "Guide"]
+  },
+  {
+    "id": "borjomi-green",
+    "city": "ბორჯომი",
+    "cityEn": "Borjomi",
+    "title": "ბორჯომის მწვანე ხეობა",
+    "titleEn": "The Green Valley of Borjomi",
+    "description": "ეროვნული პარკი, მინერალური წყლები და ტყის მშვიდი ბილიკები.",
+    "descriptionEn": "National park trails, mineral water springs and peaceful forest paths.",
+    "price": 120,
+    "days": 1,
+    "type": "nature",
+    "typeKa": "ბუნება",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Borjomi%20Central%20Park%2C%20Borjomi%2C%20Georgia.%20July%202024.jpg?width=1200",
+    "itinerary": ["ბორჯომის ცენტრალური პარკი", "მინერალური წყლის წყარო", "ტყის ბილიკი და ხედები"],
+    "itineraryEn": ["Borjomi Central Park", "Mineral water spring", "Forest trail and viewpoints"],
+    "included": ["ტრანსპორტი", "გიდი"],
+    "includedEn": ["Transport", "Guide"]
+  },
+  {
+    "id": "kutaisi-caves",
+    "city": "ქუთაისი",
+    "cityEn": "Kutaisi",
+    "title": "ქუთაისი და პრომეთეს მღვიმე",
+    "titleEn": "Kutaisi and Prometheus Cave",
+    "description": "იმერეთის ისტორია, ბაგრატი და მიწისქვეშა საოცარი სამყარო.",
+    "descriptionEn": "Imereti history, Bagrati Cathedral and an extraordinary underground world.",
+    "price": 145,
+    "days": 1,
+    "type": "adventure",
+    "typeKa": "თავგადასავალი",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Kutaisi%2C%20Bagrati%20Cathedral-%286%29.jpg?width=1200",
+    "itinerary": ["ბაგრატის ტაძარი", "გელათის მონასტერი", "პრომეთეს მღვიმე"],
+    "itineraryEn": ["Bagrati Cathedral", "Gelati Monastery", "Prometheus Cave"],
+    "included": ["ტრანსპორტი", "გიდი", "მღვიმის ბილეთი"],
+    "includedEn": ["Transport", "Guide", "Cave ticket"]
+  },
+  {
+    "id": "signagi-weekend",
+    "city": "სიღნაღი",
+    "cityEn": "Sighnaghi",
+    "title": "სიღნაღის რომანტიკული უიქენდი",
+    "titleEn": "A Romantic Weekend in Sighnaghi",
+    "description": "ფერადი აივნები, ალაზნის ველი და ნელი, გემრიელი დასვენება.",
+    "descriptionEn": "Colourful balconies, Alazani Valley views and a slow, flavourful escape.",
+    "price": 320,
+    "days": 2,
+    "type": "wine",
+    "typeKa": "ღვინო",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/2015-05-03%20Signagi.jpg?width=1200",
+    "itinerary": [
+      "დღე 1 — სიღნაღის გალავანი და მუზეუმი",
+      "დღე 2 — კახური საუზმე და მარნის მონახულება"
+    ],
+    "itineraryEn": [
+      "Day 1 — Sighnaghi walls and museum",
+      "Day 2 — Kakhetian breakfast and winery visit"
+    ],
+    "included": ["1 ღამის განთავსება", "საუზმე", "მარნის მონახულება"],
+    "includedEn": ["1 night accommodation", "Breakfast", "Winery visit"]
+  }
+]

@@ -1,0 +1,898 @@
+[
+  {
+    "from": "TBS",
+    "to": "BUS",
+    "city": "ბათუმი",
+    "cityEn": "Batumi",
+    "country": "საქართველო",
+    "countryEn": "Georgia"
+  },
+  {
+    "from": "TBS",
+    "to": "IST",
+    "city": "სტამბოლი",
+    "cityEn": "Istanbul",
+    "country": "თურქეთი",
+    "countryEn": "Turkey"
+  },
+  {
+    "from": "TBS",
+    "to": "SAW",
+    "city": "სტამბოლი (საბიჰა)",
+    "cityEn": "Istanbul (Sabiha)",
+    "country": "თურქეთი",
+    "countryEn": "Turkey"
+  },
+  {
+    "from": "TBS",
+    "to": "TLV",
+    "city": "თელ-ავივი",
+    "cityEn": "Tel Aviv",
+    "country": "ისრაელი",
+    "countryEn": "Israel"
+  },
+  {
+    "from": "TBS",
+    "to": "DXB",
+    "city": "დუბაი",
+    "cityEn": "Dubai",
+    "country": "არაბთა გაერთიანებული საამიროები",
+    "countryEn": "United Arab Emirates"
+  },
+  {
+    "from": "TBS",
+    "to": "SHJ",
+    "city": "შარჯა",
+    "cityEn": "Sharjah",
+    "country": "არაბთა გაერთიანებული საამიროები",
+    "countryEn": "United Arab Emirates"
+  },
+  {
+    "from": "TBS",
+    "to": "AUH",
+    "city": "აბუ-დაბი",
+    "cityEn": "Abu Dhabi",
+    "country": "არაბთა გაერთიანებული საამიროები",
+    "countryEn": "United Arab Emirates"
+  },
+  {
+    "from": "TBS",
+    "to": "DOH",
+    "city": "დოჰა",
+    "cityEn": "Doha",
+    "country": "კატარი",
+    "countryEn": "Qatar"
+  },
+  {
+    "from": "TBS",
+    "to": "KWI",
+    "city": "ქუვეითი",
+    "cityEn": "Kuwait City",
+    "country": "ქუვეითი",
+    "countryEn": "Kuwait"
+  },
+  {
+    "from": "TBS",
+    "to": "BAH",
+    "city": "მანამა",
+    "cityEn": "Manama",
+    "country": "ბაჰრეინი",
+    "countryEn": "Bahrain"
+  },
+  {
+    "from": "TBS",
+    "to": "GYD",
+    "city": "ბაქო",
+    "cityEn": "Baku",
+    "country": "აზერბაიჯანი",
+    "countryEn": "Azerbaijan"
+  },
+  {
+    "from": "TBS",
+    "to": "EVN",
+    "city": "ერევანი",
+    "cityEn": "Yerevan",
+    "country": "სომხეთი",
+    "countryEn": "Armenia"
+  },
+  {
+    "from": "TBS",
+    "to": "MUC",
+    "city": "მიუნხენი",
+    "cityEn": "Munich",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "TBS",
+    "to": "FRA",
+    "city": "ფრანკფურტი",
+    "cityEn": "Frankfurt",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "TBS",
+    "to": "HAM",
+    "city": "ჰამბურგი",
+    "cityEn": "Hamburg",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "TBS",
+    "to": "LEJ",
+    "city": "ლაიფციგი",
+    "cityEn": "Leipzig",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "TBS",
+    "to": "CGN",
+    "city": "კიოლნი",
+    "cityEn": "Cologne",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "TBS",
+    "to": "STR",
+    "city": "შტუტგარტი",
+    "cityEn": "Stuttgart",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "TBS",
+    "to": "BER",
+    "city": "ბერლინი",
+    "cityEn": "Berlin",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "TBS",
+    "to": "CDG",
+    "city": "პარიზი",
+    "cityEn": "Paris",
+    "country": "საფრანგეთი",
+    "countryEn": "France"
+  },
+  {
+    "from": "TBS",
+    "to": "ORY",
+    "city": "პარიზი (ორლი)",
+    "cityEn": "Paris (Orly)",
+    "country": "საფრანგეთი",
+    "countryEn": "France"
+  },
+  {
+    "from": "TBS",
+    "to": "AMS",
+    "city": "ამსტერდამი",
+    "cityEn": "Amsterdam",
+    "country": "ნიდერლანდები",
+    "countryEn": "Netherlands"
+  },
+  {
+    "from": "TBS",
+    "to": "VIE",
+    "city": "ვენა",
+    "cityEn": "Vienna",
+    "country": "ავსტრია",
+    "countryEn": "Austria"
+  },
+  {
+    "from": "TBS",
+    "to": "LHR",
+    "city": "ლონდონი",
+    "cityEn": "London",
+    "country": "გაერთიანებული სამეფო",
+    "countryEn": "United Kingdom"
+  },
+  {
+    "from": "TBS",
+    "to": "RIX",
+    "city": "რიგა",
+    "cityEn": "Riga",
+    "country": "ლატვია",
+    "countryEn": "Latvia"
+  },
+  {
+    "from": "TBS",
+    "to": "WAW",
+    "city": "ვარშავა",
+    "cityEn": "Warsaw",
+    "country": "პოლონეთი",
+    "countryEn": "Poland"
+  },
+  {
+    "from": "TBS",
+    "to": "FCO",
+    "city": "რომი",
+    "cityEn": "Rome",
+    "country": "იტალია",
+    "countryEn": "Italy"
+  },
+  {
+    "from": "TBS",
+    "to": "BGY",
+    "city": "მილანი",
+    "cityEn": "Milan",
+    "country": "იტალია",
+    "countryEn": "Italy"
+  },
+  {
+    "from": "TBS",
+    "to": "ATH",
+    "city": "ათენი",
+    "cityEn": "Athens",
+    "country": "საბერძნეთი",
+    "countryEn": "Greece"
+  },
+  {
+    "from": "TBS",
+    "to": "LCA",
+    "city": "ლარნაკა",
+    "cityEn": "Larnaca",
+    "country": "კვიპროსი",
+    "countryEn": "Cyprus"
+  },
+  {
+    "from": "TBS",
+    "to": "BEG",
+    "city": "ბელგრადი",
+    "cityEn": "Belgrade",
+    "country": "სერბეთი",
+    "countryEn": "Serbia"
+  },
+  {
+    "from": "TBS",
+    "to": "RMO",
+    "city": "კიშინიოვი",
+    "cityEn": "Chișinău",
+    "country": "მოლდოვა",
+    "countryEn": "Moldova"
+  },
+  {
+    "from": "TBS",
+    "to": "MSQ",
+    "city": "მინსკი",
+    "cityEn": "Minsk",
+    "country": "ბელარუსი",
+    "countryEn": "Belarus"
+  },
+  {
+    "from": "TBS",
+    "to": "ALA",
+    "city": "ალმათი",
+    "cityEn": "Almaty",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "TBS",
+    "to": "NQZ",
+    "city": "ასტანა",
+    "cityEn": "Astana",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "TBS",
+    "to": "TAS",
+    "city": "ტაშკენტი",
+    "cityEn": "Tashkent",
+    "country": "უზბეკეთი",
+    "countryEn": "Uzbekistan"
+  },
+  {
+    "from": "TBS",
+    "to": "URC",
+    "city": "ურუმჩი",
+    "cityEn": "Ürümqi",
+    "country": "ჩინეთი",
+    "countryEn": "China"
+  },
+  {
+    "from": "TBS",
+    "to": "PVG",
+    "city": "შანხაი",
+    "cityEn": "Shanghai",
+    "country": "ჩინეთი",
+    "countryEn": "China"
+  },
+  {
+    "from": "TBS",
+    "to": "JED",
+    "city": "ჯიდა",
+    "cityEn": "Jeddah",
+    "country": "საუდის არაბეთი",
+    "countryEn": "Saudi Arabia"
+  },
+  {
+    "from": "TBS",
+    "to": "RUH",
+    "city": "ერ-რიადი",
+    "cityEn": "Riyadh",
+    "country": "საუდის არაბეთი",
+    "countryEn": "Saudi Arabia"
+  },
+  {
+    "from": "TBS",
+    "to": "LED",
+    "city": "სანქტ-პეტერბურგი",
+    "cityEn": "Saint Petersburg",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "TBS",
+    "to": "VKO",
+    "city": "მოსკოვი",
+    "cityEn": "Moscow",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "TBS",
+    "to": "ZIA",
+    "city": "მოსკოვი",
+    "cityEn": "Moscow",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "TBS",
+    "to": "KZN",
+    "city": "ყაზანი",
+    "cityEn": "Kazan",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "TBS",
+    "to": "AER",
+    "city": "სოჭი",
+    "cityEn": "Sochi",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "TBS",
+    "to": "KRR",
+    "city": "კრასნოდარი",
+    "cityEn": "Krasnodar",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "TBS",
+    "to": "OVB",
+    "city": "ნოვოსიბირსკი",
+    "cityEn": "Novosibirsk",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "KUT",
+    "to": "IST",
+    "city": "სტამბოლი",
+    "cityEn": "Istanbul",
+    "country": "თურქეთი",
+    "countryEn": "Turkey"
+  },
+  {
+    "from": "KUT",
+    "to": "SAW",
+    "city": "სტამბოლი (საბიჰა)",
+    "cityEn": "Istanbul (Sabiha)",
+    "country": "თურქეთი",
+    "countryEn": "Turkey"
+  },
+  {
+    "from": "KUT",
+    "to": "VIE",
+    "city": "ვენა",
+    "cityEn": "Vienna",
+    "country": "ავსტრია",
+    "countryEn": "Austria"
+  },
+  {
+    "from": "KUT",
+    "to": "MSQ",
+    "city": "მინსკი",
+    "cityEn": "Minsk",
+    "country": "ბელარუსი",
+    "countryEn": "Belarus"
+  },
+  {
+    "from": "KUT",
+    "to": "CRL",
+    "city": "ბრიუსელი",
+    "cityEn": "Brussels Charleroi",
+    "country": "ბელგია",
+    "countryEn": "Belgium"
+  },
+  {
+    "from": "KUT",
+    "to": "LCA",
+    "city": "ლარნაკა",
+    "cityEn": "Larnaca",
+    "country": "კვიპროსი",
+    "countryEn": "Cyprus"
+  },
+  {
+    "from": "KUT",
+    "to": "PRG",
+    "city": "პრაღა",
+    "cityEn": "Prague",
+    "country": "ჩეხეთი",
+    "countryEn": "Czechia"
+  },
+  {
+    "from": "KUT",
+    "to": "LYS",
+    "city": "ლიონი",
+    "cityEn": "Lyon",
+    "country": "საფრანგეთი",
+    "countryEn": "France"
+  },
+  {
+    "from": "KUT",
+    "to": "BVA",
+    "city": "პარიზი",
+    "cityEn": "Paris Beauvais",
+    "country": "საფრანგეთი",
+    "countryEn": "France"
+  },
+  {
+    "from": "KUT",
+    "to": "BER",
+    "city": "ბერლინი",
+    "cityEn": "Berlin",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "KUT",
+    "to": "DTM",
+    "city": "დორტმუნდი",
+    "cityEn": "Dortmund",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "KUT",
+    "to": "FMM",
+    "city": "მემინგენი",
+    "cityEn": "Memmingen",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "KUT",
+    "to": "HHN",
+    "city": "ფრანკფურტი-ჰანი",
+    "cityEn": "Frankfurt-Hahn",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "KUT",
+    "to": "HAM",
+    "city": "ჰამბურგი",
+    "cityEn": "Hamburg",
+    "country": "გერმანია",
+    "countryEn": "Germany"
+  },
+  {
+    "from": "KUT",
+    "to": "BUD",
+    "city": "ბუდაპეშტი",
+    "cityEn": "Budapest",
+    "country": "უნგრეთი",
+    "countryEn": "Hungary"
+  },
+  {
+    "from": "KUT",
+    "to": "MXP",
+    "city": "მილანი",
+    "cityEn": "Milan",
+    "country": "იტალია",
+    "countryEn": "Italy"
+  },
+  {
+    "from": "KUT",
+    "to": "FCO",
+    "city": "რომი",
+    "cityEn": "Rome",
+    "country": "იტალია",
+    "countryEn": "Italy"
+  },
+  {
+    "from": "KUT",
+    "to": "VCE",
+    "city": "ვენეცია",
+    "cityEn": "Venice",
+    "country": "იტალია",
+    "countryEn": "Italy"
+  },
+  {
+    "from": "KUT",
+    "to": "WAW",
+    "city": "ვარშავა",
+    "cityEn": "Warsaw",
+    "country": "პოლონეთი",
+    "countryEn": "Poland"
+  },
+  {
+    "from": "KUT",
+    "to": "KTW",
+    "city": "კატოვიცე",
+    "cityEn": "Katowice",
+    "country": "პოლონეთი",
+    "countryEn": "Poland"
+  },
+  {
+    "from": "KUT",
+    "to": "POZ",
+    "city": "პოზნანი",
+    "cityEn": "Poznań",
+    "country": "პოლონეთი",
+    "countryEn": "Poland"
+  },
+  {
+    "from": "KUT",
+    "to": "WRO",
+    "city": "ვროცლავი",
+    "cityEn": "Wrocław",
+    "country": "პოლონეთი",
+    "countryEn": "Poland"
+  },
+  {
+    "from": "KUT",
+    "to": "RZE",
+    "city": "ჟეშუვი",
+    "cityEn": "Rzeszów",
+    "country": "პოლონეთი",
+    "countryEn": "Poland"
+  },
+  {
+    "from": "KUT",
+    "to": "ATH",
+    "city": "ათენი",
+    "cityEn": "Athens",
+    "country": "საბერძნეთი",
+    "countryEn": "Greece"
+  },
+  {
+    "from": "KUT",
+    "to": "SKG",
+    "city": "თესალონიკი",
+    "cityEn": "Thessaloniki",
+    "country": "საბერძნეთი",
+    "countryEn": "Greece"
+  },
+  {
+    "from": "KUT",
+    "to": "BCN",
+    "city": "ბარსელონა",
+    "cityEn": "Barcelona",
+    "country": "ესპანეთი",
+    "countryEn": "Spain"
+  },
+  {
+    "from": "KUT",
+    "to": "MAD",
+    "city": "მადრიდი",
+    "cityEn": "Madrid",
+    "country": "ესპანეთი",
+    "countryEn": "Spain"
+  },
+  {
+    "from": "KUT",
+    "to": "BTS",
+    "city": "ბრატისლავა",
+    "cityEn": "Bratislava",
+    "country": "სლოვაკეთი",
+    "countryEn": "Slovakia"
+  },
+  {
+    "from": "KUT",
+    "to": "VNO",
+    "city": "ვილნიუსი",
+    "cityEn": "Vilnius",
+    "country": "ლიტვა",
+    "countryEn": "Lithuania"
+  },
+  {
+    "from": "KUT",
+    "to": "RIX",
+    "city": "რიგა",
+    "cityEn": "Riga",
+    "country": "ლატვია",
+    "countryEn": "Latvia"
+  },
+  {
+    "from": "KUT",
+    "to": "TLL",
+    "city": "ტალინი",
+    "cityEn": "Tallinn",
+    "country": "ესტონეთი",
+    "countryEn": "Estonia"
+  },
+  {
+    "from": "KUT",
+    "to": "ALA",
+    "city": "ალმათი",
+    "cityEn": "Almaty",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "KUT",
+    "to": "NQZ",
+    "city": "ასტანა",
+    "cityEn": "Astana",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "KUT",
+    "to": "SCO",
+    "city": "აქტაუ",
+    "cityEn": "Aktau",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "KUT",
+    "to": "GUW",
+    "city": "ატირაუ",
+    "cityEn": "Atyrau",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "KUT",
+    "to": "CIT",
+    "city": "შიმქენტი",
+    "cityEn": "Shymkent",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "KUT",
+    "to": "AUH",
+    "city": "აბუ-დაბი",
+    "cityEn": "Abu Dhabi",
+    "country": "არაბთა გაერთიანებული საამიროები",
+    "countryEn": "United Arab Emirates"
+  },
+  {
+    "from": "KUT",
+    "to": "MST",
+    "city": "მესტია",
+    "cityEn": "Mestia",
+    "country": "საქართველო",
+    "countryEn": "Georgia"
+  },
+  {
+    "from": "BUS",
+    "to": "TBS",
+    "city": "თბილისი",
+    "cityEn": "Tbilisi",
+    "country": "საქართველო",
+    "countryEn": "Georgia"
+  },
+  {
+    "from": "BUS",
+    "to": "IST",
+    "city": "სტამბოლი",
+    "cityEn": "Istanbul",
+    "country": "თურქეთი",
+    "countryEn": "Turkey"
+  },
+  {
+    "from": "BUS",
+    "to": "SAW",
+    "city": "სტამბოლი (საბიჰა)",
+    "cityEn": "Istanbul (Sabiha)",
+    "country": "თურქეთი",
+    "countryEn": "Turkey"
+  },
+  {
+    "from": "BUS",
+    "to": "TLV",
+    "city": "თელ-ავივი",
+    "cityEn": "Tel Aviv",
+    "country": "ისრაელი",
+    "countryEn": "Israel"
+  },
+  {
+    "from": "BUS",
+    "to": "MSQ",
+    "city": "მინსკი",
+    "cityEn": "Minsk",
+    "country": "ბელარუსი",
+    "countryEn": "Belarus"
+  },
+  {
+    "from": "BUS",
+    "to": "EVN",
+    "city": "ერევანი",
+    "cityEn": "Yerevan",
+    "country": "სომხეთი",
+    "countryEn": "Armenia"
+  },
+  {
+    "from": "BUS",
+    "to": "GYD",
+    "city": "ბაქო",
+    "cityEn": "Baku",
+    "country": "აზერბაიჯანი",
+    "countryEn": "Azerbaijan"
+  },
+  {
+    "from": "BUS",
+    "to": "DXB",
+    "city": "დუბაი",
+    "cityEn": "Dubai",
+    "country": "არაბთა გაერთიანებული საამიროები",
+    "countryEn": "United Arab Emirates"
+  },
+  {
+    "from": "BUS",
+    "to": "KWI",
+    "city": "ქუვეითი",
+    "cityEn": "Kuwait City",
+    "country": "ქუვეითი",
+    "countryEn": "Kuwait"
+  },
+  {
+    "from": "BUS",
+    "to": "RMO",
+    "city": "კიშინიოვი",
+    "cityEn": "Chișinău",
+    "country": "მოლდოვა",
+    "countryEn": "Moldova"
+  },
+  {
+    "from": "BUS",
+    "to": "ALA",
+    "city": "ალმათი",
+    "cityEn": "Almaty",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "BUS",
+    "to": "NQZ",
+    "city": "ასტანა",
+    "cityEn": "Astana",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "BUS",
+    "to": "SCO",
+    "city": "აქტაუ",
+    "cityEn": "Aktau",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "BUS",
+    "to": "GUW",
+    "city": "ატირაუ",
+    "cityEn": "Atyrau",
+    "country": "ყაზახეთი",
+    "countryEn": "Kazakhstan"
+  },
+  {
+    "from": "BUS",
+    "to": "TAS",
+    "city": "ტაშკენტი",
+    "cityEn": "Tashkent",
+    "country": "უზბეკეთი",
+    "countryEn": "Uzbekistan"
+  },
+  {
+    "from": "BUS",
+    "to": "RIX",
+    "city": "რიგა",
+    "cityEn": "Riga",
+    "country": "ლატვია",
+    "countryEn": "Latvia"
+  },
+  {
+    "from": "BUS",
+    "to": "LED",
+    "city": "სანქტ-პეტერბურგი",
+    "cityEn": "Saint Petersburg",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "BUS",
+    "to": "VKO",
+    "city": "მოსკოვი",
+    "cityEn": "Moscow",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "BUS",
+    "to": "KZN",
+    "city": "ყაზანი",
+    "cityEn": "Kazan",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "BUS",
+    "to": "AER",
+    "city": "სოჭი",
+    "cityEn": "Sochi",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "BUS",
+    "to": "SVX",
+    "city": "ეკატერინბურგი",
+    "cityEn": "Yekaterinburg",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "BUS",
+    "to": "MRV",
+    "city": "მინერალური წყლები",
+    "cityEn": "Mineralnye Vody",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "BUS",
+    "to": "KUF",
+    "city": "სამარა",
+    "cityEn": "Samara",
+    "country": "რუსეთი",
+    "countryEn": "Russia"
+  },
+  {
+    "from": "BUS",
+    "to": "AMM",
+    "city": "ამანი",
+    "cityEn": "Amman",
+    "country": "იორდანია",
+    "countryEn": "Jordan"
+  },
+  {
+    "from": "BUS",
+    "to": "IKA",
+    "city": "თეირანი",
+    "cityEn": "Tehran",
+    "country": "ირანი",
+    "countryEn": "Iran"
+  },
+  {
+    "from": "BUS",
+    "to": "ERB",
+    "city": "ერბილი",
+    "cityEn": "Erbil",
+    "country": "ერაყი",
+    "countryEn": "Iraq"
+  },
+  {
+    "from": "KUT",
+    "to": "MEP",
+    "city": "მესტია",
+    "cityEn": "Mestia",
+    "country": "საქართველო",
+    "countryEn": "Georgia"
+  }
+]

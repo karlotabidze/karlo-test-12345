@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#173c35" />
+    <meta
+      name="description"
+      content="Saqo Travel — აღმოაჩინე საქართველო ტურებით და დაგეგმე შენი შემდეგი მოგზაურობა."
+    />
+    <meta property="og:title" content="Saqo Travel — აღმოაჩინე საქართველო" />
+    <meta
+      property="og:description"
+      content="Saqo Travel — აღმოაჩინე საქართველო ტურებით და დაგეგმე შენი შემდეგი მოგზაურობა."
+    />
+    <title>Saqo Travel — აღმოაჩინე საქართველო</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Saqo Travel მთავარი">
+        <span class="brand-mark">S</span
+        ><span class="brand-copy"><strong>SAQO</strong><small>TRAVEL</small></span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="მენიუს გახსნა" aria-expanded="false">
+        ☰
+      </button>
+      <nav class="main-nav" id="main-nav">
+        <a href="#home" data-i18n="navHome">მთავარი</a>
+        <a href="#tours" data-i18n="navTours">შიდა ტურები</a>
+        <a href="#flights" data-i18n="navFlights">ფრენები</a>
+        <a href="#about" data-i18n="navAbout">ჩვენს შესახებ</a>
+        <a href="#contact" data-i18n="navContact">კონტაქტი</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          class="language-switch"
+          id="language-switch"
+          type="button"
+          aria-label="Switch language"
+        >
+          EN
+        </button>
+        <button
+          class="theme-switch"
+          id="theme-switch"
+          type="button"
+          aria-label="Dark mode"
+          title="Dark mode"
+        >
+          ☾
+        </button>
+        <a class="header-cta" href="#tours" data-i18n="planTrip">დაგეგმე მოგზაურობა</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+          <p class="eyebrow light" data-i18n="heroEyebrow">აღმოაჩინე საქართველო ჩვენთან ერთად</p>
+          <h1 data-i18n="heroTitle">შენი შემდეგი თავგადასავალი<br />აქ იწყება.</h1>
+          <p class="hero-lead" data-i18n="heroText">
+            მთები, ზღვა, ღვინო და დაუვიწყარი ისტორიები — აღმოაჩინე საქართველო შენს ტემპში.
+          </p>
+          <div class="hero-buttons">
+            <a class="button button-primary" href="#tours" data-i18n="exploreTours"
+              >ტურების აღმოჩენა</a
+            >
+            <a class="button button-glass" href="#flights" data-i18n="searchFlights"
+              >შიდა ფრენები</a
+            >
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <span>GEORGIA, YOUR WAY</span><span>41°43' N&nbsp; 44°47' E</span>
+        </div>
+      </section>
+
+      <section class="search-panel wrap" aria-label="მოგზაურობის ძიება">
+        <div class="search-tabs">
+          <button class="search-tab active" data-tab="tour-search" data-i18n="tabTours">
+            ტურები
+          </button>
+          <button class="search-tab" data-tab="flight-search" data-i18n="tabFlights">
+            შიდა ფრენები
+          </button>
+        </div>
+        <form class="search-form" id="tour-search">
+          <label
+            ><span data-i18n="destination">მიმართულება</span
+            ><select id="quick-city">
+              <option value="" data-i18n="allDestinations">ყველა მიმართულება</option>
+            </select></label
+          >
+          <label
+            ><span data-i18n="tourType">ტურის ტიპი</span
+            ><select id="quick-type">
+              <option value="" data-i18n="allTypes">ყველა ტიპი</option>
+              <option value="nature" data-i18n="nature">ბუნება</option>
+              <option value="culture" data-i18n="culture">კულტურა</option>
+              <option value="wine" data-i18n="wine">ღვინო</option>
+              <option value="adventure" data-i18n="adventure">თავგადასავალი</option>
+            </select></label
+          >
+          <label
+            ><span data-i18n="duration">ხანგრძლივობა</span
+            ><select id="quick-duration">
+              <option value="" data-i18n="anyDuration">ნებისმიერი</option>
+              <option value="1" data-i18n="oneDay">1 დღე</option>
+              <option value="2" data-i18n="twoThreeDays">2–3 დღე</option>
+              <option value="4" data-i18n="fourPlusDays">4+ დღე</option>
+            </select></label
+          >
+          <button class="button button-dark" type="submit" data-i18n="findTour">ტურის ძიება</button>
+        </form>
+        <form class="search-form flight-search hidden" id="flight-search">
+          <label
+            ><span data-i18n="from">საიდან</span
+            ><select id="flight-from">
+              <option value="TBS">თბილისი · TBS</option>
+              <option value="BUS">ბათუმი · BUS</option>
+              <option value="KUT">ქუთაისი · KUT</option>
+            </select></label
+          >
+          <label
+            ><span data-i18n="to">სად</span
+            ><select id="flight-to"></select
+          ></label>
+          <label
+            ><span data-i18n="date">თარიღი</span><input id="flight-date" type="date" required
+          /></label>
+          <label
+            ><span data-i18n="passengers">მგზავრები</span
+            ><select id="flight-pax">
+              <option>1</option>
+              <option selected>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select></label
+          >
+          <button class="button button-dark" type="submit" data-i18n="findFlight">
+            რეისების ძიება
+          </button>
+        </form>
+      </section>
+
+      <section class="section wrap" id="tours">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="toursEyebrow">შენი საქართველო</p>
+            <h2 data-i18n="toursTitle">აღმოაჩინე ადგილები,<br />რომლებიც არასდროს დაგავიწყდება.</h2>
+          </div>
+          <p data-i18n="toursIntro">
+            შერჩეული მარშრუტები საქართველოს ყველა კუთხეში — ქალაქური გასეირნებიდან მთის
+            თავგადასავლებამდე.
+          </p>
+        </div>
+        <div class="filters">
+          <label
+            ><span data-i18n="filterCity">ქალაქი</span
+            ><select id="filter-city">
+              <option value="" data-i18n="allCities">ყველა ქალაქი</option>
+            </select></label
+          >
+          <label
+            ><span data-i18n="filterPrice">მაქს. ფასი</span
+            ><select id="filter-price">
+              <option value="">ნებისმიერი</option>
+              <option value="100" data-i18n="upTo100">100 ₾-მდე</option>
+              <option value="200" data-i18n="upTo200">200 ₾-მდე</option>
+              <option value="400" data-i18n="upTo400">400 ₾-მდე</option>
+            </select></label
+          >
+          <label
+            ><span data-i18n="filterDuration">ხანგრძლივობა</span
+            ><select id="filter-duration">
+              <option value="">ყველა</option>
+              <option value="1">1 დღე</option>
+              <option value="2">2–3 დღე</option>
+              <option value="4">4+ დღე</option>
+            </select></label
+          >
+          <label
+            ><span data-i18n="filterType">ტურის ტიპი</span
+            ><select id="filter-type">
+              <option value="">ყველა ტიპი</option>
+              <option value="nature">ბუნება</option>
+              <option value="culture">კულტურა</option>
+              <option value="wine">ღვინო</option>
+              <option value="adventure">თავგადასავალი</option>
+            </select></label
+          >
+        </div>
+        <div class="tour-grid" id="tour-grid" aria-live="polite">
+          <p class="loading">ტურები იტვირთება...</p>
+        </div>
+      </section>
+
+      <section class="flight-section" id="flights">
+        <div class="wrap">
+          <div class="section-heading light-heading">
+            <div>
+              <p class="eyebrow light" data-i18n="flightEyebrow">საქართველო ზემოდან</p>
+              <h2 data-i18n="flightTitle">გადაადგილდი მარტივად.</h2>
+            </div>
+            <p data-i18n="flightIntro">მოძებნე შიდა რეისები თბილისს, ბათუმსა და ქუთაისს შორის.</p>
+          </div>
+          <div class="flight-results" id="flight-results">
+            <p class="flight-placeholder" data-i18n="flightHint">
+              აირჩიე მიმართულება და თარიღი ფრენების მოსაძებნად.
+            </p>
+          </div>
+          <p class="disclaimer" data-i18n="flightDisclaimer">
+            ფრენები ამ ეტაპზე დემო მონაცემებია. ფასები და განრიგი არ წარმოადგენს რეალურ შეთავაზებას.
+          </p>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about">
+        <div class="wrap about-grid">
+          <div class="about-photo" role="img" aria-label="საქართველოს მთების ხედი"></div>
+          <div class="about-copy">
+            <p class="eyebrow" data-i18n="aboutEyebrow">ჩვენი ამბავი</p>
+            <h2 data-i18n="aboutTitle">საქართველო უფრო მეტია,<br />ვიდრე მიმართულება.</h2>
+            <p data-i18n="aboutText">
+              Saqo Travel აერთიანებს ადგილობრივ გამოცდილებას, გამორჩეულ მარშრუტებსა და მარტივ
+              დაგეგმვას. გვჯერა, რომ საუკეთესო მოგზაურობა ადამიანებით, გემოებითა და აღმოჩენებით
+              იქმნება.
+            </p>
+            <div class="about-stats">
+              <div><strong>9+</strong><span data-i18n="regions">რეგიონი</span></div>
+              <div>
+                <strong>100%</strong><span data-i18n="local">ადგილობრივი შთაბეჭდილებები</span>
+              </div>
+              <div><strong>24/7</strong><span data-i18n="support">მხარდაჭერა</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact">
+        <div class="wrap contact-grid">
+          <div>
+            <p class="eyebrow light" data-i18n="contactEyebrow">დავგეგმოთ ერთად</p>
+            <h2 data-i18n="contactTitle">მზად ხარ ახალი<br />ისტორიისთვის?</h2>
+            <p data-i18n="contactText">
+              მოგვწერე სასურველი მიმართულება და ჩვენი გუნდი დაგეხმარება მოგზაურობის დაგეგმვაში.
+            </p>
+            <a class="contact-email" href="mailto:saqotravel@gmail.com">saqotravel@gmail.com</a>
+            <div class="contact-phone">
+              <p><strong>მობილური:</strong> <a href="tel:+995557565997">557 56 59 97</a></p>
+              <p>
+                <strong>WhatsApp:</strong>
+                <a href="https://wa.me/995557565997" target="_blank" rel="noopener noreferrer"
+                  >557 56 59 97</a
+                >
+              </p>
+            </div>
+          </div>
+          <form class="contact-form" id="contact-form">
+            <label
+              ><span data-i18n="yourName">სახელი</span
+              ><input
+                name="name"
+                required
+                placeholder="თქვენი სახელი"
+                data-i18n-placeholder="namePlaceholder" /></label
+            ><label
+              ><span data-i18n="yourPhone">ტელეფონი</span
+              ><input
+                name="phone"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                required
+                placeholder="557 56 59 97"
+                data-i18n-placeholder="phonePlaceholder" /></label
+            ><label
+              ><span data-i18n="yourMessage">შეტყობინება</span
+              ><textarea
+                name="message"
+                rows="3"
+                required
+                placeholder="სად გსურთ მოგზაურობა?"
+                data-i18n-placeholder="messagePlaceholder"
+              ></textarea></label
+            ><button class="button button-primary" type="submit" data-i18n="sendRequest">
+              მოთხოვნის გაგზავნა
+            </button>
+            <p class="form-note" data-i18n="contactNote">
+              მოთხოვნა გაიგზავნება პირდაპირ ჩვენს ელფოსტაზე.
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#home"
+        ><span class="brand-mark">S</span
+        ><span class="brand-copy"><strong>SAQO</strong><small>TRAVEL</small></span></a
+      ><span
+        >© <span id="year"></span> Saqo Travel.
+        <span data-i18n="rights">ყველა უფლება დაცულია.</span></span
+      ><a href="#home" data-i18n="backTop">ზემოთ დაბრუნება ↑</a>
+    </footer>
+
+    <dialog class="tour-dialog" id="tour-dialog">
+      <button class="dialog-close" id="dialog-close" aria-label="დახურვა">×</button>
+      <div id="tour-detail"></div>
+    </dialog>
+    <dialog class="booking-dialog" id="booking-dialog">
+      <button class="dialog-close" id="booking-close" aria-label="დახურვა">×</button>
+      <h2 data-i18n="bookingTitle">ტურის მოთხოვნა</h2>
+      <form id="booking-form">
+        <input type="hidden" name="tour" /><label
+          ><span data-i18n="yourName">სახელი</span><input name="name" required /></label
+        ><label
+          ><span data-i18n="yourPhone">ტელეფონი</span
+          ><input
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            placeholder="557 56 59 97"
+            required /></label
+        ><label
+          ><span data-i18n="date">თარიღი</span><input name="date" type="date" required /></label
+        ><label
+          ><span data-i18n="passengers">მგზავრები</span
+          ><input name="people" type="number" min="1" max="20" value="2" required /></label
+        ><button class="button button-dark" type="submit" data-i18n="sendBooking">
+          მოთხოვნის გაგზავნა
+        </button>
+      </form>
+    </dialog>
+  </body>
+</html>

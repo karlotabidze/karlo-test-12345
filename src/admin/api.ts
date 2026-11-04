@@ -1,5 +1,3 @@
-import { auth } from "../lib/firebase.ts";
-
 export class ApiRequestError extends Error {
   status: number;
   dependencies: string[];
@@ -13,14 +11,7 @@ export class ApiRequestError extends Error {
 }
 
 async function getBearerHeaders(isFormData = false): Promise<Record<string, string>> {
-  const user = auth.currentUser;
-  if (!user) {
-    throw new ApiRequestError("Not authenticated. Please sign in again.", 401);
-  }
-  const token = await user.getIdToken();
-  const headers: Record<string, string> = {
-    Authorization: `Bearer ${token}`,
-  };
+  const headers: Record<string, string> = {};
   if (!isFormData) {
     headers["Content-Type"] = "application/json";
   }
@@ -41,6 +32,7 @@ export async function adminFetch<T>(
   const fetchInit: RequestInit = {
     method: options.method || "GET",
     headers,
+    credentials: "same-origin",
   };
 
   if (options.formData) {

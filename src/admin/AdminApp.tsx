@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import {
   LayoutDashboard,
   Compass,
@@ -15,8 +14,7 @@ import {
   X,
   Lock,
 } from "lucide-react";
-import { auth, googleAuthProvider } from "../lib/firebase.ts";
-import { adminFetch, ApiRequestError } from "./api.ts";
+import { adminFetch } from "./api.ts";
 import { OverviewModule } from "./modules/OverviewModule.tsx";
 import { ToursModule } from "./modules/ToursModule.tsx";
 import { DestinationsModule } from "./modules/DestinationsModule.tsx";
@@ -46,11 +44,13 @@ const NAV_ITEMS: Array<{
 ];
 
 export const AdminApp: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<{ uid: string; email: string } | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [isAuthorizedAdmin, setIsAuthorizedAdmin] = useState<boolean | null>(null);
   const [authError, setAuthError] = useState("");
   const [signingIn, setSigningIn] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("karlotabidze@gmail.com");
+  const [loginPassword, setLoginPassword] = useState("");
 
   const [activeTab, setActiveTab] = useState<AdminTab>("overview");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -63,51 +63,48 @@ export const AdminApp: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (nextUser) => {
-      setUser(nextUser);
-      if (!nextUser) {
-        setIsAuthorizedAdmin(null);
-        setAuthReady(true);
-        return;
-      }
-      setIsAuthorizedAdmin(null);
-      adminFetch<{ authorized: boolean }>("/api/admin/session")
-        .then(() => {
-          setIsAuthorizedAdmin(true);
-          setAuthReady(true);
-        })
-        .catch((err: unknown) => {
-          if (err instanceof ApiRequestError && err.status === 403) {
-            setIsAuthorizedAdmin(false);
-            setAuthError(err.message);
-          } else {
-            setIsAuthorizedAdmin(false);
-            setAuthError(
-              err instanceof Error ? err.message : "Failed to verify administrator session.",
-            );
-          }
-          setAuthReady(true);
-        });
-    });
-    return () => unsub();
+    let cancelled = false;
+    fetch("/api/admin/session", { credentials: "same-origin" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Not signed in");
+        return response.json() as Promise<{ uid: string; email: string }>;
+      })
+      .then((session) => {
+        if (cancelled) return;
+        setUser({ uid: session.uid, email: session.email });
+        setIsAuthorizedAdmin(true);
+      })
+      .catch(() => {
+        if (!cancelled) { setUser(null); setIsAuthorizedAdmin(null); }
+      })
+      .finally(() => { if (!cancelled) setAuthReady(true); });
+    return () => { cancelled = true; };
   }, []);
 
-  const handleGoogleSignIn = async () => {
+  const handlePasswordSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setSigningIn(true);
     setAuthError("");
     try {
-      await signInWithPopup(auth, googleAuthProvider);
+      const response = await fetch("/api/admin/login", {
+        method: "POST", credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+      });
+      const result = await response.json().catch(() => ({})) as { error?: string; email?: string; uid?: string };
+      if (!response.ok) throw new Error(result.error || "Login failed.");
+      setUser({ uid: result.uid || loginEmail.toLowerCase(), email: result.email || loginEmail });
+      setIsAuthorizedAdmin(true);
+      setLoginPassword("");
     } catch (err) {
-      setAuthError(
-        err instanceof Error ? err.message : "Google Sign-In failed. Ensure popups are allowed.",
-      );
-    } finally {
-      setSigningIn(false);
-    }
+      setAuthError(err instanceof Error ? err.message : "Login failed.");
+    } finally { setSigningIn(false); }
   };
 
   const handleSignOut = async () => {
-    await signOut(auth);
+    await fetch("/api/admin/logout", { method: "POST", credentials: "same-origin" });
+    setUser(null);
+    setIsAuthorizedAdmin(null);
   };
 
   const handleNavigate = (tabKey: string) => {
@@ -164,7 +161,7 @@ export const AdminApp: React.FC = () => {
                 Sign in to manage marketplace
               </h1>
               <p className="text-sm text-slate-600">
-                Authenticate with your authorized Google administrator account to manage tours,
+                Sign in with your administrator credentials to manage tours,
                 destinations, flight routes, pricing, media, and website content.
               </p>
             </div>
@@ -175,14 +172,24 @@ export const AdminApp: React.FC = () => {
               </div>
             )}
 
-            <button
-              type="button"
-              disabled={signingIn}
-              onClick={() => void handleGoogleSignIn()}
-              className="w-full py-2.5 px-4 bg-[#173c35] hover:bg-[#1e4d44] text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-60 cursor-pointer"
-            >
-              {signingIn ? "Signing in with Google..." : "Continue with Google"}
-            </button>
+            <form onSubmit={(event) => void handlePasswordSignIn(event)} className="space-y-3">
+              <label className="block text-xs font-medium text-slate-700">
+                Administrator email
+                <input type="email" autoComplete="username" required value={loginEmail}
+                  onChange={(event) => setLoginEmail(event.target.value)}
+                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-emerald-800" />
+              </label>
+              <label className="block text-xs font-medium text-slate-700">
+                Admin password
+                <input type="password" autoComplete="current-password" required value={loginPassword}
+                  onChange={(event) => setLoginPassword(event.target.value)}
+                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-emerald-800" />
+              </label>
+              <button type="submit" disabled={signingIn}
+                className="w-full py-2.5 px-4 bg-[#173c35] hover:bg-[#1e4d44] text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-60 cursor-pointer">
+                {signingIn ? "Signing in..." : "Sign in"}
+              </button>
+            </form>
 
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
               <span>Protected Admin Route</span>
@@ -207,7 +214,7 @@ export const AdminApp: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <h1 className="text-lg font-semibold text-slate-900">Unauthorized Google Account</h1>
+              <h1 className="text-lg font-semibold text-slate-900">Administrator Account Not Authorized</h1>
               <p className="text-sm text-slate-600">
                 Signed in as <strong className="text-slate-900">{user.email}</strong>, which is not
                 listed as an authorized SaqoTravel administrator.

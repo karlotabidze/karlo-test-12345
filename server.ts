@@ -1,4 +1,5 @@
 import express, { type Response, type NextFunction } from "express";
+import { timingSafeEqual } from "node:crypto";
 import multer from "multer";
 import path from "node:path";
 import fs from "node:fs/promises";
@@ -45,7 +46,7 @@ import {
   updateTour,
   upsertMainSiteContent,
 } from "./src/db/repository.ts";
-import { requireAuth, type AuthRequest } from "./src/middleware/auth.ts";
+import { createAdminSession, getAdminCookieOptions, COOKIE_NAME, requireAuth, type AuthRequest } from "./src/middleware/auth.ts";
 import { MAX_IMAGE_SIZE_BYTES, removeStoredImage, storeUploadedImage } from "./src/lib/storage.ts";
 
 dotenv.config();
@@ -94,7 +95,11 @@ async function startServer() {
   app.use("/data", express.static(path.join(rootDir, "data")));
 
   // Ensure initial repository data is seeded lazily on first API request
-  app.use("/api", async (_req, res, next) => {
+  app.use("/api", async (req, res, next) => {
+    if (req.path === "/admin/login" || req.path === "/admin/logout" || req.path === "/admin/session") {
+      next();
+      return;
+    }
     try {
       await ensureDatabaseSeeded();
       next();
@@ -150,8 +155,40 @@ async function startServer() {
   });
 
   // =========================================================================
-  // ADMIN API ENDPOINTS (Protected by Firebase Google Auth)
+  // ADMIN API ENDPOINTS (password login + signed HttpOnly session cookie)
   // =========================================================================
+  app.post("/api/admin/login", (req, res) => {
+    const configuredPassword = process.env["ADMIN_PASSWORD"] || "";
+    const email = String(req.body?.email || "").trim().toLowerCase();
+    const password = String(req.body?.password || "");
+    const allowedEmails = String(process.env["ADMIN_EMAILS"] || "karlotabidze@gmail.com")
+      .split(",").map((value) => value.trim().toLowerCase()).filter(Boolean);
+    if (!configuredPassword || configuredPassword.length < 12) {
+      res.status(503).json({ error: "Admin login is not configured. Set ADMIN_PASSWORD in Render." });
+      return;
+    }
+    const supplied = Buffer.from(password);
+    const expected = Buffer.from(configuredPassword);
+    const passwordMatches = supplied.length === expected.length && timingSafeEqual(supplied, expected);
+    if (!allowedEmails.includes(email) || !passwordMatches) {
+      res.status(401).json({ error: "Invalid administrator email or password." });
+      return;
+    }
+    try {
+      const token = createAdminSession(email);
+      res.cookie(COOKIE_NAME, token, getAdminCookieOptions());
+      res.json({ authorized: true, uid: email, email, role: "admin" });
+    } catch (error) {
+      console.error("Admin session setup error:", error);
+      res.status(503).json({ error: "Admin session is not configured. Set ADMIN_SESSION_SECRET in Render." });
+    }
+  });
+
+  app.post("/api/admin/logout", (_req, res) => {
+    res.clearCookie(COOKIE_NAME, { httpOnly: true, secure: process.env["NODE_ENV"] === "production", sameSite: "strict", path: "/" });
+    res.json({ success: true });
+  });
+
   app.use("/api/admin", requireAuth);
 
   app.get("/api/admin/session", (req: AuthRequest, res) => {

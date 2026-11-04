@@ -292,7 +292,7 @@ export const AdminApp: React.FC = () => {
             <div className="p-3.5 border-t border-slate-200 space-y-2">
               <div className="px-2">
                 <div className="text-xs font-semibold text-slate-900 truncate">
-                  {user.displayName || "Administrator"}
+                  {"Administrator"}
                 </div>
                 <div className="text-[11px] text-slate-500 truncate">{user.email}</div>
               </div>

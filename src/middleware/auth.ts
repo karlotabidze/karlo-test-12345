@@ -1,81 +1,67 @@
 import type { Request, Response, NextFunction } from "express";
-import type { DecodedIdToken } from "firebase-admin/auth";
-import { adminAuth } from "../lib/firebase-admin.ts";
-import { upsertUser } from "../db/repository.ts";
+import { createHmac, timingSafeEqual } from "node:crypto";
 
 export interface AuthRequest extends Request {
-  user?: DecodedIdToken;
+  user?: { uid: string; email: string };
 }
 
-const DEFAULT_OWNER_EMAIL = "karlotabidze@gmail.com";
+export const COOKIE_NAME = "saqo_admin_session";
+const SESSION_TTL_SECONDS = 12 * 60 * 60;
 
-export function isAllowlistedAdminEmail(email: string): boolean {
-  const normalized = email.trim().toLowerCase();
-  if (!normalized) return false;
-
-  const configured = String(process.env["ADMIN_EMAILS"] || "")
-    .split(",")
-    .map((entry) => entry.trim().toLowerCase())
-    .filter(Boolean);
-
-  const allowlist = new Set<string>([DEFAULT_OWNER_EMAIL, ...configured]);
-  return allowlist.has(normalized);
+function sign(value: string): string {
+  const secret = process.env["ADMIN_SESSION_SECRET"];
+  if (!secret || secret.length < 32) {
+    throw new Error("ADMIN_SESSION_SECRET must be at least 32 characters.");
+  }
+  return createHmac("sha256", secret).update(value).digest("base64url");
 }
 
-export const requireAuth = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    res.status(401).json({ error: "Unauthorized: Missing authentication token" });
-    return;
-  }
+export function createAdminSession(email: string): string {
+  const payload = Buffer.from(JSON.stringify({
+    uid: email.toLowerCase(),
+    email: email.toLowerCase(),
+    exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SECONDS,
+  })).toString("base64url");
+  return `${payload}.${sign(payload)}`;
+}
 
-  const token = authHeader.slice("Bearer ".length).trim();
-  if (!token) {
-    res.status(401).json({ error: "Unauthorized: Empty authentication token" });
-    return;
-  }
-
-  let decodedToken: DecodedIdToken;
+function readAdminSession(token: string): { uid: string; email: string } | null {
+  const [payload, signature, extra] = token.split(".");
+  if (!payload || !signature || extra) return null;
+  let expected: string;
+  try { expected = sign(payload); } catch { return null; }
+  const actual = Buffer.from(signature);
+  const wanted = Buffer.from(expected);
+  if (actual.length !== wanted.length || !timingSafeEqual(actual, wanted)) return null;
   try {
-    decodedToken = await adminAuth.verifyIdToken(token);
-  } catch (error) {
-    console.error("Error verifying Firebase ID token:", error);
-    res.status(401).json({ error: "Unauthorized: Invalid or expired token" });
+    const data = JSON.parse(Buffer.from(payload, "base64url").toString("utf8")) as {
+      uid?: string; email?: string; exp?: number;
+    };
+    if (!data.uid || !data.email || !data.exp || data.exp <= Math.floor(Date.now() / 1000)) return null;
+    return { uid: data.uid, email: data.email };
+  } catch { return null; }
+}
+
+export function getAdminCookieOptions() {
+  return {
+    httpOnly: true,
+    secure: process.env["NODE_ENV"] === "production",
+    sameSite: "strict" as const,
+    path: "/",
+    maxAge: SESSION_TTL_SECONDS * 1000,
+  };
+}
+
+export const requireAuth = (req: AuthRequest, res: Response, next: NextFunction): void => {
+  const token = (req.headers.cookie || "").split(";").map((v) => v.trim())
+    .find((v) => v.startsWith(`${COOKIE_NAME}=`))
+    ?.slice(COOKIE_NAME.length + 1);
+  let session: { uid: string; email: string } | null = null;
+  try { session = token ? readAdminSession(decodeURIComponent(token)) : null; } catch { session = null; }
+  if (!session) {
+    res.status(401).json({ error: "Unauthorized: Please sign in to the admin panel." });
     return;
   }
-
-  const email = (decodedToken.email || "").trim().toLowerCase();
-  if (!email || decodedToken.email_verified === false) {
-    res.status(403).json({
-      error: "Forbidden: A verified Google email address is required for administrator access.",
-    });
-    return;
-  }
-
-  try {
-    const allowlisted = isAllowlistedAdminEmail(email);
-    const dbUser = await upsertUser(
-      decodedToken.uid,
-      email,
-      decodedToken["name"] ? String(decodedToken["name"]) : "",
-      allowlisted,
-    );
-
-    if (!allowlisted && dbUser?.role !== "admin") {
-      res.status(403).json({
-        error: `Forbidden: ${email} is not authorized to access the SaqoTravel administration panel.`,
-      });
-      return;
-    }
-
-    req.user = decodedToken;
-    next();
-  } catch (error) {
-    console.error("Error authorizing administrator account:", error);
-    res.status(500).json({ error: "Failed to verify administrator authorization" });
-  }
+  req.user = session;
+  next();
 };
